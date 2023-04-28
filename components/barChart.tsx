@@ -10,7 +10,6 @@ import {
   Legend,
 } from "chart.js";
 import { Line, Bar, Doughnut } from "react-chartjs-2";
-import fs from "fs";
 ChartJS.register(
   CategoryScale,
   LinearScale,

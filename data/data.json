@@ -1,4 +1,25 @@
 {
-    "labels": ["January", "February", "March", "April", "May", "June", "July"],
-    "values": [65, 59, 80, 81, 56, 55, 40]
-  }
+  "labels":  [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July"
+  ],
+  "datasets": [
+      {
+          "label": "Student 3",
+          "data": "120, 90, 45, 90, 14, 100, 88"
+      },
+      {
+          "label": "Student 2",
+          "data": "150, 80, 99, 100, 90, 110, 97"
+      },
+      {
+          "label": "Student 1",
+          "data": "140, 100, 89, 134, 120, 78, 56"
+      }
+  ]
+}
