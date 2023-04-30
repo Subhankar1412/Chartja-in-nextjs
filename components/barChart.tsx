@@ -63,6 +63,15 @@ export default function BarChart() {
     ],
   };
 
+  fetch("http://localhost:3000/api/static-data")
+    .then((response) => response.json())
+    .then((data) => {
+      // const labels = data.labels;
+      const labelss = data.map((mdata: any) => mdata.labels);
+      console.log(labelss);
+    })
+    .catch((error) => console.error(error));
+
   return (
     <div>
       <Bar data={data} options={options} />
