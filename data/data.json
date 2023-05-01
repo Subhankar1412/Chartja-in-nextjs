@@ -11,16 +11,14 @@
   ],
   "datasets": [
       {
-          "label": "Student 3",
-          "data": "120, 90, 45, 90, 14, 100, 88"
+        "label": "Dataset 1",
+        "data": [10, 20, 30, 40, 50, 60, 70],
+        "backgroundColor": "rgba(255, 99, 132, 0.5)"
       },
       {
-          "label": "Student 2",
-          "data": "150, 80, 99, 100, 90, 110, 97"
-      },
-      {
-          "label": "Student 1",
-          "data": "140, 100, 89, 134, 120, 78, 56"
+        "label": "Dataset 2",
+        "data": [70, 60, 50, 40, 30, 20, 10],
+        "backgroundColor": "rgba(53, 162, 235, 0.5)"
       }
   ]
 }

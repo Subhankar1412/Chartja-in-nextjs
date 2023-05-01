@@ -1,7 +1,4 @@
-import React from "react";
-import useSWR from "swr";
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+import React, { useState, useEffect } from "react";
 
 import {
   Chart as ChartJS,
@@ -14,6 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line, Bar, Doughnut } from "react-chartjs-2";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -24,17 +22,31 @@ ChartJS.register(
   Legend
 );
 
+interface Data {
+  name: string;
+  labels: string[];
+  datasets: {
+    label: string;
+    data: string;
+    backgroundColor: string;
+  }[];
+}
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 export default function BarChart() {
-  // const { data, error } = useSWR(
-  //   "http://localhost:3000/api/static-data",
-  //   fetcher
-  // );
+  const [data, setData] = useState<Data | null>(null);
 
-  // if (error) return <div>Failed to load</div>;
-  // //Handle the loading state
-  // if (!data) return <div>Loading...</div>;
-
-  // console.log(data);
+  useEffect(() => {
+    fetch("http://localhost:3000/api/static-data")
+      .then((response) => response.json())
+      .then((data) => {
+        const allData = JSON.parse(data);
+        setData(allData);
+        console.log(allData.datasets);
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   const options = {
     responsive: true,
@@ -52,39 +64,10 @@ export default function BarChart() {
     },
   };
 
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
-
   let chartData = {
-    labels,
-    datasets: [
-      {
-        label: "Dataset 1",
-        data: [10, 20, 30, 40, 50, 60, 70],
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-      {
-        label: "Dataset 2",
-        data: [70, 60, 50, 40, 30, 20, 10],
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
-      },
-    ],
+    labels: data?.labels || [],
+    datasets: data?.datasets || [],
   };
-
-  fetch("http://localhost:3000/api/static-data")
-    .then((response) => response.json())
-    .then((data) => {
-      // const labels = data.map((mdata: any) => mdata.labels);
-      console.log(data.name);
-    })
-    .catch((error) => console.error(error));
 
   return (
     <div>
