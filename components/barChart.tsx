@@ -1,4 +1,8 @@
 import React from "react";
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -21,6 +25,17 @@ ChartJS.register(
 );
 
 export default function BarChart() {
+  // const { data, error } = useSWR(
+  //   "http://localhost:3000/api/static-data",
+  //   fetcher
+  // );
+
+  // if (error) return <div>Failed to load</div>;
+  // //Handle the loading state
+  // if (!data) return <div>Loading...</div>;
+
+  // console.log(data);
+
   const options = {
     responsive: true,
     plugins: {
@@ -47,7 +62,7 @@ export default function BarChart() {
     "July",
   ];
 
-  let data = {
+  let chartData = {
     labels,
     datasets: [
       {
@@ -66,15 +81,14 @@ export default function BarChart() {
   fetch("http://localhost:3000/api/static-data")
     .then((response) => response.json())
     .then((data) => {
-      // const labels = data.labels;
-      const labelss = data.map((mdata: any) => mdata.labels);
-      console.log(labelss);
+      // const labels = data.map((mdata: any) => mdata.labels);
+      console.log(data.name);
     })
     .catch((error) => console.error(error));
 
   return (
     <div>
-      <Bar data={data} options={options} />
+      <Bar data={chartData} options={options} />
     </div>
   );
 }
